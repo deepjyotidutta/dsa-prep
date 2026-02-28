@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2-Month DSA Prep Plan — FAANG+</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 11pt;
+      color: #1a1a2e;
+      background: #fff;
+      line-height: 1.5;
+    }
+
+    /* ── Print Settings ── */
+    @media print {
+      body { font-size: 9.5pt; }
+      .no-print { display: none; }
+      .page-break { page-break-before: always; }
+      h1 { font-size: 18pt; }
+      h2 { font-size: 13pt; }
+      h3 { font-size: 11pt; }
+      table { font-size: 8.5pt; }
+      .cover { min-height: auto; padding: 40px 20px; }
+    }
+
+    /* ── Cover Page ── */
+    .cover {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #e94560 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 40px;
+    }
+    .cover h1 { font-size: 32pt; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; }
+    .cover .subtitle { font-size: 14pt; opacity: 0.85; margin-bottom: 30px; }
+    .cover .badges { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 10pt;
+      font-weight: 600;
+    }
+    .cover .meta { font-size: 10pt; opacity: 0.7; }
+
+    /* ── Content Wrapper ── */
+    .content { max-width: 960px; margin: 0 auto; padding: 30px 24px; }
+
+    /* ── Typography ── */
+    h1 { font-size: 22pt; color: #0f3460; margin: 24px 0 10px; border-bottom: 3px solid #e94560; padding-bottom: 6px; }
+    h2 { font-size: 15pt; color: #16213e; margin: 28px 0 8px; padding: 8px 14px; background: #f0f4ff; border-left: 4px solid #0f3460; border-radius: 0 6px 6px 0; }
+    h3 { font-size: 11.5pt; color: #0f3460; margin: 18px 0 6px; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0 8px 22px; }
+    li { margin: 3px 0; }
+
+    /* ── Tables ── */
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 10pt; }
+    thead tr { background: #0f3460; color: #fff; }
+    thead th { padding: 8px 10px; text-align: left; font-weight: 600; }
+    tbody tr:nth-child(even) { background: #f5f7ff; }
+    tbody tr:hover { background: #e8eeff; }
+    td { padding: 7px 10px; border-bottom: 1px solid #dde3f0; vertical-align: top; }
+
+    /* ── Company Tags ── */
+    .tag { display: inline-block; border-radius: 4px; padding: 2px 7px; font-size: 8pt; font-weight: 700; margin: 1px; }
+    .tag-openai  { background: #00a67e22; color: #00a67e; border: 1px solid #00a67e; }
+    .tag-amazon  { background: #ff990022; color: #cc7a00; border: 1px solid #ff9900; }
+    .tag-meta    { background: #0866ff22; color: #0866ff; border: 1px solid #0866ff; }
+    .tag-google  { background: #ea433522; color: #ea4335; border: 1px solid #ea4335; }
+    .tag-netflix { background: #e5000022; color: #e50000; border: 1px solid #e50000; }
+
+    /* ── Difficulty Badges ── */
+    .easy   { color: #008000; font-weight: 700; }
+    .medium { color: #d68000; font-weight: 700; }
+    .hard   { color: #c0392b; font-weight: 700; }
+
+    /* ── Callout Boxes ── */
+    .callout { border-radius: 8px; padding: 14px 18px; margin: 14px 0; }
+    .callout-info  { background: #e8f4fd; border-left: 4px solid #2980b9; }
+    .callout-warn  { background: #fef9e7; border-left: 4px solid #f39c12; }
+    .callout-success { background: #eafaf1; border-left: 4px solid #27ae60; }
+    .callout-danger { background: #fdedec; border-left: 4px solid #e74c3c; }
+    .callout strong { display: block; margin-bottom: 4px; font-size: 10.5pt; }
+
+    /* ── Checklist ── */
+    .checklist { list-style: none; margin-left: 0; }
+    .checklist li::before { content: "☐ "; font-size: 12pt; color: #0f3460; }
+
+    /* ── Week Header ── */
+    .week-header {
+      background: linear-gradient(90deg, #0f3460, #16213e);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 8px;
+      margin: 24px 0 14px;
+    }
+    .week-header h2 { background: none; border: none; color: #fff; padding: 0; margin: 0; font-size: 14pt; }
+    .week-header .theme { font-size: 10pt; opacity: 0.8; margin-top: 4px; }
+
+    /* ── Phase Banner ── */
+    .phase-banner {
+      background: linear-gradient(90deg, #e94560, #c0392b);
+      color: #fff;
+      text-align: center;
+      padding: 18px;
+      border-radius: 10px;
+      font-size: 16pt;
+      font-weight: 800;
+      margin: 30px 0 20px;
+      letter-spacing: 1px;
+    }
+
+    /* ── Progress Bar ── */
+    .progress-wrap { background: #eee; border-radius: 10px; height: 10px; margin: 4px 0 12px; }
+    .progress-fill { background: linear-gradient(90deg, #0f3460, #e94560); border-radius: 10px; height: 10px; }
+
+    /* ── Routine Box ── */
+    .routine-box {
+      background: #1a1a2e;
+      color: #e0e0e0;
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-family: 'Courier New', monospace;
+      font-size: 9.5pt;
+      margin: 16px 0;
+      line-height: 1.8;
+    }
+
+    /* ── Footer ── */
+    .footer { text-align: center; padding: 30px; color: #888; font-size: 9pt; border-top: 1px solid #eee; margin-top: 40px; }
+
+    /* ── Quiz Section ── */
+    .quiz-box {
+      background: #fafbff;
+      border: 1.5px solid #c5cce8;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+    }
+    .quiz-box h3 { color: #e94560; margin-top: 0; }
+    .quiz-q { margin: 6px 0; padding-left: 8px; border-left: 3px solid #0f3460; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ COVER PAGE ══ -->
+<div class="cover">
+  <h1>2-Month DSA Prep Plan</h1>
+  <div class="subtitle">Complete Interview Preparation for FAANG+ Companies</div>
+  <div class="badges">
+    <span class="badge">OpenAI</span>
+    <span class="badge">Amazon</span>
+    <span class="badge">Meta</span>
+    <span class="badge">Alphabet</span>
+    <span class="badge">Netflix</span>
+  </div>
+  <div class="meta">
+    175+ Problems &nbsp;|&nbsp; 8 Weeks &nbsp;|&nbsp; Daily Quizzes &nbsp;|&nbsp; Weekly Checkpoints &nbsp;|&nbsp; Mock Interviews
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CONTENT ══ -->
+<div class="content">
+
+  <!-- Overview -->
+  <h1>Overview & Ground Rules</h1>
+
+  <table>
+    <thead><tr><th>Parameter</th><th>Target</th></tr></thead>
+    <tbody>
+      <tr><td>Daily Commitment</td><td>2–3 hours/day</td></tr>
+      <tr><td>Total Problems</td><td>160–175</td></tr>
+      <tr><td>Primary Platform</td><td>LeetCode + Neetcode.io</td></tr>
+      <tr><td>Mock Interviews</td><td>4+ sessions</td></tr>
+      <tr><td>Weekly Checkpoints</td><td>Every Sunday</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Company-Specific Focus</h2>
+  <table>
+    <thead><tr><th>Company</th><th>Heavy Focus Areas</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag tag-openai">OpenAI</span></td><td>ML system design, Graphs, DP, Research depth</td></tr>
+      <tr><td><span class="tag tag-amazon">Amazon</span></td><td>Leadership Principles, Arrays, Trees, System Design</td></tr>
+      <tr><td><span class="tag tag-meta">Meta</span></td><td>Graphs, Arrays, Strings, Product sense</td></tr>
+      <tr><td><span class="tag tag-google">Alphabet</span></td><td>Hard DP, Math-heavy, Segment Trees, System Design</td></tr>
+      <tr><td><span class="tag tag-netflix">Netflix</span></td><td>Scalability, Distributed Systems, System Design</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════ MONTH 1 ═══════════════ -->
+  <div class="phase-banner">MONTH 1 — BUILD THE FOUNDATION</div>
+
+  <!-- Week 1 -->
+  <div class="week-header">
+    <h2>Week 1: Arrays, Strings &amp; HashMaps</h2>
+    <div class="theme">Theme: The most common interview category — lock this in first</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Day</th><th>Topic</th><th>Problems</th><th>Difficulty</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td>Arrays Basics</td><td>Two Sum #1, Best Time to Buy Stock #121, Contains Duplicate #217</td><td><span class="easy">Easy×3</span></td></tr>
+      <tr><td>Tue</td><td>Two Pointers</td><td>Valid Palindrome #125, 3Sum #15, Container With Most Water #11</td><td><span class="easy">E</span>, <span class="medium">M×2</span></td></tr>
+      <tr><td>Wed</td><td>Sliding Window</td><td>Longest Substring Without Repeating #3, Permutation in String #567, Minimum Window Substring #76</td><td><span class="medium">M</span>, <span class="medium">M</span>, <span class="hard">H</span></td></tr>
+      <tr><td>Thu</td><td>HashMaps</td><td>Group Anagrams #49, Top K Frequent Elements #347, Product of Array Except Self #238</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Fri</td><td>Strings</td><td>Valid Anagram #242, Encode/Decode Strings #271, Longest Consecutive Sequence #128</td><td><span class="easy">E</span>, <span class="medium">M×2</span></td></tr>
+      <tr><td>Sat</td><td>Timed Practice (45min each)</td><td>Maximum Subarray #53, Two Sum II #167, Anagram Groups revisit</td><td>Mixed</td></tr>
+      <tr><td>Sun</td><td>Review + Weekly Quiz</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz-box">
+    <h3>Week 1 — Checkpoint Quiz</h3>
+    <div class="quiz-q">Q1. Given an array, find all pairs that sum to target. What is the optimal approach and complexity?</div>
+    <div class="quiz-q">Q2. Find the longest substring with at most K distinct characters. Write the approach.</div>
+    <div class="quiz-q">Q3. What is the difference between a HashMap and HashSet? When do you use each?</div>
+    <div class="quiz-q">Q4. Why is Two Sum O(n) and not O(n²)?</div>
+    <div class="quiz-q">Q5. Given anagram problems — what data structure do you always reach for first?</div>
+    <p style="margin-top:10px"><strong>Pass bar: 4/5.</strong> If below, redo Friday problems before Week 2.</p>
+  </div>
+
+  <!-- Week 2 -->
+  <div class="week-header page-break">
+    <h2>Week 2: Linked Lists, Stacks &amp; Queues</h2>
+    <div class="theme">Theme: Pointer manipulation and linear data structures</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Day</th><th>Topic</th><th>Problems</th><th>Difficulty</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td>Linked Lists Basics</td><td>Reverse Linked List #206, Merge Two Sorted Lists #21, Reorder List #143</td><td><span class="easy">E</span>, <span class="easy">E</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Tue</td><td>Fast/Slow Pointers</td><td>Linked List Cycle #141, Find Duplicate Number #287, Middle of Linked List #876</td><td><span class="easy">E</span>, <span class="medium">M</span>, <span class="easy">E</span></td></tr>
+      <tr><td>Wed</td><td>Stacks</td><td>Valid Parentheses #20, Min Stack #155, Daily Temperatures #739</td><td><span class="easy">E</span>, <span class="medium">M</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Thu</td><td>Monotonic Stack</td><td>Next Greater Element I #496, Car Fleet #853, Largest Rectangle in Histogram #84</td><td><span class="easy">E</span>, <span class="medium">M</span>, <span class="hard">H</span></td></tr>
+      <tr><td>Fri</td><td>Queues + Deque</td><td>Sliding Window Maximum #239, Design Circular Queue #622, Remove Nth Node #19</td><td><span class="hard">H</span>, <span class="medium">M</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Sat</td><td>Timed Mixed</td><td>Copy List with Random Pointer #138, LRU Cache #146, Decode String #394</td><td><span class="medium">M</span>, <span class="medium">M</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Sun</td><td>Review + Weekly Quiz</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz-box">
+    <h3>Week 2 — Checkpoint Quiz</h3>
+    <div class="quiz-q">Q1. Reverse a linked list iteratively AND recursively — write both from memory.</div>
+    <div class="quiz-q">Q2. How do you detect a cycle in a linked list? Time and space complexity?</div>
+    <div class="quiz-q">Q3. Explain monotonic stack in your own words with a concrete example.</div>
+    <div class="quiz-q">Q4. What is the difference between a stack and a queue? Give a real-world use case for each.</div>
+    <div class="quiz-q">Q5. Given a stream of integers, how would you find the sliding window maximum efficiently?</div>
+    <p style="margin-top:10px"><strong>Pass bar: 4/5.</strong></p>
+  </div>
+
+  <!-- Week 3 -->
+  <div class="week-header page-break">
+    <h2>Week 3: Binary Search &amp; Trees</h2>
+    <div class="theme">Theme: Divide-and-conquer thinking + tree traversal mastery</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Day</th><th>Topic</th><th>Problems</th><th>Difficulty</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td>Binary Search</td><td>Binary Search #704, Search in Rotated Sorted Array #33, Find Min in Rotated Array #153</td><td><span class="easy">E</span>, <span class="medium">M</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Tue</td><td>Binary Search on Answer</td><td>Koko Eating Bananas #875, Time Based Key-Value Store #981, Median of Two Sorted Arrays #4</td><td><span class="medium">M</span>, <span class="medium">M</span>, <span class="hard">H</span></td></tr>
+      <tr><td>Wed</td><td>Binary Tree Traversal</td><td>Invert Binary Tree #226, Max Depth #104, Diameter of Binary Tree #543, Same Tree #100</td><td><span class="easy">E×2</span>, <span class="easy">E</span>, <span class="easy">E</span></td></tr>
+      <tr><td>Thu</td><td>Binary Tree Advanced</td><td>Level Order Traversal #102, Right Side View #199, Count Good Nodes #1448, Zigzag Level Order #103</td><td><span class="medium">M×4</span></td></tr>
+      <tr><td>Fri</td><td>BST</td><td>Validate BST #98, LCA of BST #235, Insert into BST #701, BST Iterator #173</td><td><span class="medium">M×3</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Sat</td><td>Timed Mock</td><td>Search a 2D Matrix #74, Balanced Binary Tree #110, Kth Smallest in BST #230</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Sun</td><td>Review + Weekly Quiz</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz-box">
+    <h3>Week 3 — Checkpoint Quiz</h3>
+    <div class="quiz-q">Q1. Implement binary search from scratch. Handle edge cases and duplicates.</div>
+    <div class="quiz-q">Q2. What is the time complexity of BFS vs DFS on a tree?</div>
+    <div class="quiz-q">Q3. How do you find the LCA of two nodes in a binary tree (not BST)?</div>
+    <div class="quiz-q">Q4. When would "binary search on the answer space" be useful? Give an example.</div>
+    <div class="quiz-q">Q5. Write level-order traversal without using a queue library.</div>
+    <p style="margin-top:10px"><strong>Pass bar: 4/5.</strong></p>
+  </div>
+
+  <!-- Week 4 -->
+  <div class="week-header page-break">
+    <h2>Week 4: Heaps &amp; Graphs (BFS/DFS + Union-Find)</h2>
+    <div class="theme">Theme: Priority-based problems + graph fundamentals</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Day</th><th>Topic</th><th>Problems</th><th>Difficulty</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td>Heaps</td><td>Kth Largest Element #215, K Closest Points to Origin #973, Task Scheduler #621</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Tue</td><td>Heaps Advanced</td><td>Find Median from Data Stream #295, Merge K Sorted Lists #23, Last Stone Weight #1046</td><td><span class="hard">H</span>, <span class="hard">H</span>, <span class="easy">E</span></td></tr>
+      <tr><td>Wed</td><td>Graph BFS</td><td>Number of Islands #200, Clone Graph #133, Rotting Oranges #994</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Thu</td><td>Graph DFS</td><td>Pacific Atlantic Water Flow #417, Surrounded Regions #130, Max Area of Island #695</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Fri</td><td>Union-Find</td><td>Number of Connected Components #323, Redundant Connection #684, Graph Valid Tree #261</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Sat</td><td>Month 1 Mock Interview</td><td>1 Easy (20 min) + 2 Mediums (35 min each) + 1 Hard (60 min)</td><td>Full Simulation</td></tr>
+      <tr><td>Sun</td><td>Month 1 Full Review</td><td>Re-do your 5 weakest problems from Month 1</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz-box">
+    <h3>Week 4 — Checkpoint Quiz</h3>
+    <div class="quiz-q">Q1. What is a min-heap vs max-heap? How do you implement one?</div>
+    <div class="quiz-q">Q2. When do you use Union-Find over BFS/DFS?</div>
+    <div class="quiz-q">Q3. What is the time complexity of Dijkstra's algorithm?</div>
+    <div class="quiz-q">Q4. Explain BFS on a graph — what guarantees does it give?</div>
+    <div class="quiz-q">Q5. How do you detect a cycle in a directed vs undirected graph?</div>
+    <p style="margin-top:10px"><strong>Pass bar: 4/5.</strong></p>
+  </div>
+
+  <div class="callout callout-warn">
+    <strong>Month 1 Self-Assessment Checkpoint</strong>
+    Score yourself 1–5 in each area: Arrays/Strings, Linked Lists, Binary Search, Trees, Graphs (basic), Heaps.<br/>
+    <strong>Any area below 3 = spend 2 extra days on it before starting Month 2.</strong>
+  </div>
+
+  <!-- ═══════════════ MONTH 2 ═══════════════ -->
+  <div class="phase-banner page-break">MONTH 2 — ADVANCED PATTERNS + COMPANY-SPECIFIC</div>
+
+  <!-- Week 5 -->
+  <div class="week-header">
+    <h2>Week 5: Dynamic Programming — Part 1</h2>
+    <div class="theme">Theme: The hardest and most important pattern for FAANG+</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Day</th><th>Topic</th><th>Problems</th><th>Difficulty</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td>DP Fundamentals (1D)</td><td>Climbing Stairs #70, House Robber #198, House Robber II #213</td><td><span class="easy">E</span>, <span class="medium">M×2</span></td></tr>
+      <tr><td>Tue</td><td>DP — Strings</td><td>Longest Palindromic Substring #5, Palindromic Substrings #647, Decode Ways #91</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Wed</td><td>DP — Subsequences</td><td>Longest Common Subsequence #1143, Longest Increasing Subsequence #300, Distinct Subsequences #115</td><td><span class="medium">M</span>, <span class="medium">M</span>, <span class="hard">H</span></td></tr>
+      <tr><td>Thu</td><td>DP — Knapsack</td><td>Partition Equal Subset Sum #416, Target Sum #494, Last Stone Weight II #1049</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Fri</td><td>DP — Unbounded</td><td>Coin Change #322, Coin Change II #518, Minimum Cost Climbing Stairs #746</td><td><span class="medium">M×2</span>, <span class="easy">E</span></td></tr>
+      <tr><td>Sat</td><td>Timed DP Practice</td><td>Word Break #139, Jump Game #55, Jump Game II #45</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Sun</td><td>Review + Weekly Quiz</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz-box">
+    <h3>Week 5 — Checkpoint Quiz</h3>
+    <div class="quiz-q">Q1. Explain the difference between memoization (top-down) and tabulation (bottom-up).</div>
+    <div class="quiz-q">Q2. Solve Coin Change — write the full solution with complexity analysis.</div>
+    <div class="quiz-q">Q3. What is the "choice" in 0/1 knapsack? What changes in unbounded knapsack?</div>
+    <div class="quiz-q">Q4. How do you reconstruct the actual solution path (not just the optimal value) in DP?</div>
+    <div class="quiz-q">Q5. When would you use DP over greedy? How do you decide between them?</div>
+    <p style="margin-top:10px"><strong>Pass bar: 4/5. DP is critical — do not move to Week 6 if you score below 3.</strong></p>
+  </div>
+
+  <!-- Week 6 -->
+  <div class="week-header page-break">
+    <h2>Week 6: DP Part 2 + Backtracking + Tries</h2>
+    <div class="theme">Theme: 2D DP and exhaustive search patterns</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Day</th><th>Topic</th><th>Problems</th><th>Difficulty</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td>2D DP</td><td>Unique Paths #62, Minimum Path Sum #64, Edit Distance #72</td><td><span class="medium">M</span>, <span class="medium">M</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Tue</td><td>2D DP Advanced</td><td>Interleaving String #97, Maximal Square #221, Burst Balloons #312</td><td><span class="medium">M</span>, <span class="medium">M</span>, <span class="hard">H</span></td></tr>
+      <tr><td>Wed</td><td>Backtracking Basics</td><td>Subsets #78, Permutations #46, Combination Sum #39</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Thu</td><td>Backtracking Advanced</td><td>Word Search #79, N-Queens #51, Palindrome Partitioning #131</td><td><span class="medium">M</span>, <span class="hard">H</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Fri</td><td>Tries</td><td>Implement Trie #208, Design Add &amp; Search Words #211, Word Search II #212</td><td><span class="medium">M</span>, <span class="medium">M</span>, <span class="hard">H</span></td></tr>
+      <tr><td>Sat</td><td>Mock Interview (company-style)</td><td>1 Easy + 2 Medium + 1 Hard — full verbal explanation out loud</td><td>Full Simulation</td></tr>
+      <tr><td>Sun</td><td>Review + Weekly Quiz</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz-box">
+    <h3>Week 6 — Checkpoint Quiz</h3>
+    <div class="quiz-q">Q1. Write the backtracking template from memory (choose / explore / unchoose).</div>
+    <div class="quiz-q">Q2. What is the time complexity of generating all subsets of n elements?</div>
+    <div class="quiz-q">Q3. How does a Trie work? When would you use it over a HashMap?</div>
+    <div class="quiz-q">Q4. Solve Edit Distance — explain the recurrence relation step by step.</div>
+    <div class="quiz-q">Q5. What's the difference between backtracking and brute force?</div>
+    <p style="margin-top:10px"><strong>Pass bar: 4/5.</strong></p>
+  </div>
+
+  <!-- Week 7 -->
+  <div class="week-header page-break">
+    <h2>Week 7: Advanced Graphs + System Design Intro</h2>
+    <div class="theme">Theme: Complete graph mastery + begin system design thinking</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Day</th><th>Topic</th><th>Problems / Study</th><th>Difficulty</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td>Shortest Path (Dijkstra)</td><td>Network Delay Time #743, Cheapest Flights K Stops #787, Path With Min Effort #1631</td><td><span class="medium">M×3</span></td></tr>
+      <tr><td>Tue</td><td>Topological Sort</td><td>Course Schedule #207, Course Schedule II #210, Alien Dictionary #269</td><td><span class="medium">M×2</span>, <span class="hard">H</span></td></tr>
+      <tr><td>Wed</td><td>Advanced Graph</td><td>Word Ladder #127, Swim in Rising Water #778, Min Cost to Connect Points #1584</td><td><span class="hard">H</span>, <span class="hard">H</span>, <span class="medium">M</span></td></tr>
+      <tr><td>Thu</td><td>System Design Study</td><td>Study: URL Shortener design, Rate Limiter design (token bucket vs sliding window)</td><td>Conceptual</td></tr>
+      <tr><td>Fri</td><td>System Design Practice</td><td>Design a News Feed system (Twitter/Instagram) — talk through it out loud for 45 min</td><td>Conceptual</td></tr>
+      <tr><td>Sat</td><td>Full Mock Interview</td><td>Pramp or peer mock: 45-min coding interview with verbal explanation</td><td>Full Simulation</td></tr>
+      <tr><td>Sun</td><td>Review + Weekly Quiz</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz-box">
+    <h3>Week 7 — Checkpoint Quiz</h3>
+    <div class="quiz-q">Q1. Explain Dijkstra's algorithm. What data structure does it use and why?</div>
+    <div class="quiz-q">Q2. When do you use topological sort? What type of graph does it require?</div>
+    <div class="quiz-q">Q3. What's Bellman-Ford used for that Dijkstra can't handle?</div>
+    <div class="quiz-q">Q4. Design a rate limiter — what are the trade-offs between token bucket and sliding window?</div>
+    <div class="quiz-q">Q5. How does BFS guarantee shortest path in an unweighted graph?</div>
+    <p style="margin-top:10px"><strong>Pass bar: 4/5.</strong></p>
+  </div>
+
+  <!-- Week 8 -->
+  <div class="week-header page-break">
+    <h2>Week 8: Company-Specific Prep + Final Mock</h2>
+    <div class="theme">Theme: Targeted company prep + simulate real interviews end-to-end</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Day</th><th>Company Focus</th><th>Plan</th></tr></thead>
+    <tbody>
+      <tr><td>Mon</td><td><span class="tag tag-amazon">Amazon</span></td><td>Top Amazon-tagged LC problems (Trees, Arrays, DP) + practice 3 Leadership Principle stories (STAR format)</td></tr>
+      <tr><td>Tue</td><td><span class="tag tag-meta">Meta</span></td><td>Graphs, arrays, strings — re-do 5 graph mediums. Practice product sense answers.</td></tr>
+      <tr><td>Wed</td><td><span class="tag tag-google">Alphabet</span></td><td>Hard DP + math-heavy problems. Range Sum Query #307, Count of Smaller Numbers #315, Segment Trees intro.</td></tr>
+      <tr><td>Thu</td><td><span class="tag tag-openai">OpenAI</span> <span class="tag tag-netflix">Netflix</span></td><td>System Design: ML pipeline design, distributed systems. Review Neetcode system design series.</td></tr>
+      <tr><td>Fri</td><td>All</td><td>Weak Area Day — re-do your 10 most missed problems from the entire 8 weeks.</td></tr>
+      <tr><td>Sat</td><td>All</td><td>Final 4-hour mock: 1 Easy (15 min) + 3 Mediums (35 min each) + 1 Hard (60 min) + 1 System Design (45 min)</td></tr>
+      <tr><td>Sun</td><td>All</td><td>Rest + light review. Read your problem log, review patterns only — no new problems.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Final Checklist -->
+  <h2 class="page-break">Final Assessment Checklist</h2>
+  <ul class="checklist">
+    <li>Can solve Easy problems in &lt;10 minutes consistently</li>
+    <li>Can solve Medium problems in &lt;30 minutes consistently</li>
+    <li>Attempted at least 5 Hard problems</li>
+    <li>Completed 150+ problems total</li>
+    <li>Done at least 4 full mock interviews</li>
+    <li>Can explain every solution verbally while coding</li>
+    <li>Comfortable with system design fundamentals</li>
+    <li>Know company-specific behavioral answers in STAR format</li>
+    <li>Weekly checkpoint scores all 4/5 or above</li>
+    <li>Problem log maintained and up to date</li>
+  </ul>
+
+  <!-- Daily Routine -->
+  <h2>Daily Routine Template</h2>
+  <div class="routine-box">
+MORNING (20 min)
+  ├── Daily quiz — answer without code (10 min)
+  └── Review yesterday's hardest problem once more (10 min)
+
+MAIN SESSION (2–2.5 hours)
+  ├── Learn pattern/concept via Neetcode video (20–30 min)
+  ├── Solve 2–3 problems (90 min)
+  └── Read top solution even if yours worked (15 min)
+
+EVENING (15 min)
+  ├── Log problems in progress tracker
+  ├── Write: what was hard and why?
+  └── Mark problems to revisit (spaced repetition)
+  </div>
+
+  <!-- Progress Table -->
+  <h2>Cumulative Problem Target by Week</h2>
+  <table>
+    <thead><tr><th>Week</th><th>Topic</th><th>Target Problems</th><th>Progress</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Arrays, Strings, HashMaps</td><td>20–25</td><td><div class="progress-wrap"><div class="progress-fill" style="width:12%"></div></div></td></tr>
+      <tr><td>2</td><td>Linked Lists, Stacks, Queues</td><td>40–50</td><td><div class="progress-wrap"><div class="progress-fill" style="width:25%"></div></div></td></tr>
+      <tr><td>3</td><td>Binary Search, Trees</td><td>60–70</td><td><div class="progress-wrap"><div class="progress-fill" style="width:38%"></div></div></td></tr>
+      <tr><td>4</td><td>Heaps, Graphs</td><td>85–100</td><td><div class="progress-wrap"><div class="progress-fill" style="width:50%"></div></div></td></tr>
+      <tr><td>5</td><td>DP Part 1</td><td>110–120</td><td><div class="progress-wrap"><div class="progress-fill" style="width:63%"></div></div></td></tr>
+      <tr><td>6</td><td>DP Part 2, Backtracking, Tries</td><td>130–140</td><td><div class="progress-wrap"><div class="progress-fill" style="width:75%"></div></div></td></tr>
+      <tr><td>7</td><td>Advanced Graphs, System Design</td><td>145–155</td><td><div class="progress-wrap"><div class="progress-fill" style="width:88%"></div></div></td></tr>
+      <tr><td>8</td><td>Company Specific + Final Mock</td><td>160–175</td><td><div class="progress-wrap"><div class="progress-fill" style="width:100%"></div></div></td></tr>
+    </tbody>
+  </table>
+
+  <!-- Resources -->
+  <h2>Key Resources</h2>
+  <table>
+    <thead><tr><th>Resource</th><th>Use</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Neetcode.io</td><td>Pattern learning, video explanations, Neetcode 150 roadmap</td><td>Free</td></tr>
+      <tr><td>LeetCode</td><td>Primary practice platform</td><td>Free / Premium</td></tr>
+      <tr><td>Pramp</td><td>Free peer mock interviews</td><td>Free</td></tr>
+      <tr><td>Interviewing.io</td><td>Anonymous mock with real engineers</td><td>Paid</td></tr>
+      <tr><td>Grokking the Coding Interview</td><td>Pattern-focused structured course</td><td>Paid</td></tr>
+      <tr><td>William Fiset (YouTube)</td><td>Graphs &amp; advanced data structures</td><td>Free</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Generated for FAANG+ Interview Prep &nbsp;|&nbsp; 2-Month Plan &nbsp;|&nbsp; OpenAI · Amazon · Meta · Alphabet · Netflix
+  </div>
+
+</div><!-- end .content -->
+
+<div class="no-print" style="text-align:center; padding: 20px; background:#f0f4ff; border-top: 2px solid #0f3460;">
+  <button onclick="window.print()" style="background:#0f3460; color:#fff; border:none; padding:12px 32px; font-size:14pt; border-radius:8px; cursor:pointer;">
+    🖨️ Print / Save as PDF
+  </button>
+  <p style="margin-top:8px; color:#666; font-size:10pt">Use browser's Print → Save as PDF for best results. Recommend A4/Letter, all margins normal.</p>
+</div>
+
+</body>
+</html>
